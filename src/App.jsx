@@ -25,7 +25,7 @@ import Guides from "./pages/Guides";
 import Faqs from "./pages/Faqs";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
-import { CartProvider } from "./context/CartContext";
+import { CartProvider } from "./Context/CartContext";
 
 function App() {
   const location = useLocation();
