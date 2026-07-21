@@ -219,7 +219,7 @@ export default function Header() {
 
 
 import { ShoppingBag } from "lucide-react";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../Context/CartContext";
 
 export function CartButton() {
     const { cartCount } = useCart();

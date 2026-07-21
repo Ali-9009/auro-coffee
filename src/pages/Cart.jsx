@@ -1,7 +1,7 @@
 import { ShoppingBag, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import QuantityControl from "../components/QuantityControl";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../Context/CartContext";
 
 export default function Cart() {
     const {

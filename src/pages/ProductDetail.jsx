@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { Check, ShoppingBag, Star } from "lucide-react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { products } from "../data/products";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../Context/CartContext";
 import toast from "react-hot-toast";
 import QuantityControl from "../components/QuantityControl";
 
@@ -63,8 +63,8 @@ export default function ProductDetail() {
             (toastItem) => (
                 <div
                     className={`pointer-events-auto w-85 max-w-[calc(100vw-24px)] rounded-2xl border border-[#eadfd5] bg-white p-3 shadow-[0_20px_60px_rgba(55,28,14,0.22)] transition-all duration-300 ${toastItem.visible
-                            ? "translate-y-0 opacity-100"
-                            : "-translate-y-3 opacity-0"
+                        ? "translate-y-0 opacity-100"
+                        : "-translate-y-3 opacity-0"
                         }`}
                 >
                     <div className="flex items-center gap-3">
