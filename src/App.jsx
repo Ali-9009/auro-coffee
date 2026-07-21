@@ -1,7 +1,6 @@
 import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { CartProvider } from "./context/CartContext";
 import { Toaster } from "react-hot-toast";
 
 
@@ -26,6 +25,7 @@ import Guides from "./pages/Guides";
 import Faqs from "./pages/Faqs";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
+import { CartProvider } from "./context/CartContext";
 
 function App() {
   const location = useLocation();
