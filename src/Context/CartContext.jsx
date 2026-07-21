@@ -22,26 +22,66 @@ export function CartProvider({ children }) {
         localStorage.setItem("coffee-cart", JSON.stringify(cartItems));
     }, [cartItems]);
 
-    const addToCart = (product, selectedSize, quantity = 1) => {
-        const size =
-            product.sizes.find((item) => item.value === selectedSize) ||
-            product.sizes[0];
+    // const addToCart = (product, selectedSize, quantity = 1) => {
+    //     const size =
+    //         product.sizes.find((item) => item.value === selectedSize) ||
+    //         product.sizes[0];
 
-        const finalPrice = product.price + size.extraPrice;
+    //     const finalPrice = product.price + size.extraPrice;
 
-        const cartItemId = `${product.id}-${size.value}`;
+    //     const cartItemId = `${product.id}-${size.value}`;
+
+    //     setCartItems((currentItems) => {
+    //         const existingItem = currentItems.find(
+    //             (item) => item.cartItemId === cartItemId
+    //         );
+
+    //         if (existingItem) {
+    //             return currentItems.map((item) =>
+    //                 item.cartItemId === cartItemId
+    //                     ? {
+    //                         ...item,
+    //                         quantity: item.quantity + quantity,
+    //                     }
+    //                     : item
+    //             );
+    //         }
+
+    //         return [
+    //             ...currentItems,
+    //             {
+    //                 cartItemId,
+    //                 productId: product.id,
+    //                 slug: product.slug,
+    //                 name: product.name,
+    //                 image: product.image,
+    //                 size: size.label,
+    //                 sizeValue: size.value,
+    //                 price: finalPrice,
+    //                 quantity,
+    //                 stock: product.stock,
+    //             },
+    //         ];
+    //     });
+    // };
+
+    const addToCart = (product, quantity = 1) => {
+        const cartKey = `${product.id}-${product.selectedSize?.id || "standard"}`;
 
         setCartItems((currentItems) => {
             const existingItem = currentItems.find(
-                (item) => item.cartItemId === cartItemId
+                (item) => item.cartKey === cartKey
             );
 
             if (existingItem) {
                 return currentItems.map((item) =>
-                    item.cartItemId === cartItemId
+                    item.cartKey === cartKey
                         ? {
                             ...item,
-                            quantity: item.quantity + quantity,
+                            quantity: Math.min(
+                                item.quantity + quantity,
+                                product.stock
+                            ),
                         }
                         : item
                 );
@@ -50,52 +90,51 @@ export function CartProvider({ children }) {
             return [
                 ...currentItems,
                 {
-                    cartItemId,
-                    productId: product.id,
-                    slug: product.slug,
-                    name: product.name,
-                    image: product.image,
-                    size: size.label,
-                    sizeValue: size.value,
-                    price: finalPrice,
+                    ...product,
+                    cartKey,
                     quantity,
-                    stock: product.stock,
                 },
             ];
         });
     };
 
-    const removeFromCart = (cartItemId) => {
+    const removeFromCart = (cartKey) => {
         setCartItems((currentItems) =>
-            currentItems.filter((item) => item.cartItemId !== cartItemId)
+            currentItems.filter(
+                (item) => item.cartKey !== cartKey
+            )
         );
     };
 
-    const increaseQuantity = (cartItemId) => {
+    const increaseQuantity = (cartKey) => {
         setCartItems((currentItems) =>
             currentItems.map((item) =>
-                item.cartItemId === cartItemId
+                item.cartKey === cartKey
                     ? {
                         ...item,
-                        quantity: Math.min(item.quantity + 1, item.stock),
+                        quantity: Math.min(
+                            item.quantity + 1,
+                            item.stock
+                        ),
                     }
                     : item
             )
         );
     };
 
-    const decreaseQuantity = (cartItemId) => {
+    const decreaseQuantity = (cartKey) => {
         setCartItems((currentItems) =>
-            currentItems
-                .map((item) =>
-                    item.cartItemId === cartItemId
-                        ? {
-                            ...item,
-                            quantity: item.quantity - 1,
-                        }
-                        : item
-                )
-                .filter((item) => item.quantity > 0)
+            currentItems.map((item) =>
+                item.cartKey === cartKey
+                    ? {
+                        ...item,
+                        quantity: Math.max(
+                            item.quantity - 1,
+                            1
+                        ),
+                    }
+                    : item
+            )
         );
     };
 

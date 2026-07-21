@@ -1,5 +1,4 @@
-import { useMemo, useState, useEffect } from "react";
-import { getProducts } from "../services/productService";
+import { useMemo, useState } from "react";
 
 import {
     Search,
@@ -10,14 +9,11 @@ import {
     ChevronRight,
 } from "lucide-react";
 
+import { products } from "../data/products";
 import ProductCard from "../components/ProductCard";
 import { Link } from "react-router-dom";
 
 export default function Shop() {
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
-
     const [search, setSearch] = useState("");
     const [activeCategory, setActiveCategory] = useState("All");
     const [sortBy, setSortBy] = useState("featured");
@@ -26,26 +22,23 @@ export default function Shop() {
     const highestPrice = useMemo(() => {
         const prices = products.map((product) => {
             const extras =
-                product.sizes?.map(
-                    (size) => size.extraPrice || 0
-                ) || [0];
+                product.sizes?.map((size) => size.extraPrice || 0) || [0];
 
             return product.price + Math.max(...extras);
         });
 
         return Math.ceil(Math.max(...prices, 20));
-    }, [products]);
+    }, []);
 
     const [maxPrice, setMaxPrice] = useState(highestPrice);
 
-    const categories = useMemo(() => {
-        return [
+    const categories = useMemo(
+        () => [
             "All",
-            ...new Set(
-                products.map((product) => product.category)
-            ),
-        ];
-    }, [products]);
+            ...new Set(products.map((product) => product.category)),
+        ],
+        []
+    );
 
     const filteredProducts = useMemo(() => {
         let result = [...products];
@@ -55,13 +48,9 @@ export default function Shop() {
         if (normalizedSearch) {
             result = result.filter((product) => {
                 return (
-                    (product.name || "")
-                        .toLowerCase()
-                        .includes(normalizedSearch) ||
-                    (product.category || "")
-                        .toLowerCase()
-                        .includes(normalizedSearch) ||
-                    (product.shortDescription || "")
+                    product.name.toLowerCase().includes(normalizedSearch) ||
+                    product.category.toLowerCase().includes(normalizedSearch) ||
+                    product.shortDescription
                         .toLowerCase()
                         .includes(normalizedSearch)
                 );
@@ -106,13 +95,7 @@ export default function Shop() {
         }
 
         return result;
-    }, [
-        products,
-        search,
-        activeCategory,
-        sortBy,
-        maxPrice,
-    ]);
+    }, [search, activeCategory, sortBy, maxPrice]);
 
     const resetFilters = () => {
         setSearch("");
@@ -237,67 +220,6 @@ export default function Shop() {
             </div>
         </div>
     );
-
-    useEffect(() => {
-        async function loadProducts() {
-            try {
-                setLoading(true);
-                setError("");
-
-                const data = await getProducts();
-
-                const formattedProducts = data.map((product) => ({
-                    ...product,
-
-                    price: product.price / 100,
-
-                    oldPrice: product.old_price
-                        ? product.old_price / 100
-                        : null,
-
-                    shortDescription:
-                        product.short_description,
-
-                    sizes:
-                        product.product_sizes?.map((size) => ({
-                            id: size.id,
-                            name: size.name,
-                            extraPrice: size.extra_price / 100,
-                        })) || [],
-                }));
-
-                setProducts(formattedProducts);
-            } catch (error) {
-                setError(error.message);
-            } finally {
-                setLoading(false);
-            }
-        }
-
-        loadProducts();
-    }, []);
-
-    useEffect(() => {
-        if (products.length > 0) {
-            setMaxPrice(highestPrice);
-        }
-    }, [products, highestPrice]);
-
-    if (loading) {
-        return (
-            <div className="min-h-125 grid place-items-center">
-                Loading products...
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="min-h-125 grid place-items-center">
-                <p>{error}</p>
-            </div>
-        );
-    }
 
     return (
         <main className="bg-[#fffaf6]">

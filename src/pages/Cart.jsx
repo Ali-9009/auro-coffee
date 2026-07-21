@@ -33,7 +33,7 @@ export default function Cart() {
                     </p>
 
                     <Link
-                        to="/"
+                        to="/shop"
                         className="mt-7 inline-flex rounded-xl bg-[#84280d] px-7 py-3 font-semibold text-white"
                     >
                         Explore products
@@ -54,7 +54,7 @@ export default function Cart() {
                     <div className="space-y-4">
                         {cartItems.map((item) => (
                             <article
-                                key={item.cartItemId}
+                                key={item.cartKey}
                                 className="flex flex-col gap-5 rounded-3xl border border-[#e5d8cf] bg-white p-4 sm:flex-row sm:items-center"
                             >
                                 <Link
@@ -76,36 +76,41 @@ export default function Cart() {
                                         {item.name}
                                     </Link>
 
-                                    <p className="mt-1 text-sm text-[#85746a]">
-                                        Size: {item.size}
-                                    </p>
+                                    {item.selectedSize && (
+                                        <p className="mt-1 text-sm text-[#85746a]">
+                                            Size: {item.selectedSize.name}
+                                        </p>
+                                    )}
 
-                                    <p className="mt-2 font-bold text-[#44291b]">
-                                        ${item.price.toFixed(2)}
-                                    </p>
+                                    <div className="mt-2">
+                                        <p className="font-bold text-[#44291b]">
+                                            ${(item.price * item.quantity).toFixed(2)}
+                                        </p>
+
+                                        {item.quantity > 1 && (
+                                            <p className="mt-1 text-xs text-[#85746a]">
+                                                ${item.price.toFixed(2)} each
+                                            </p>
+                                        )}
+                                    </div>
                                 </div>
 
                                 <div className="flex items-center justify-between gap-4 sm:flex-col sm:items-end">
                                     <QuantityControl
                                         quantity={item.quantity}
+                                        max={item.stock}
                                         onDecrease={() =>
-                                            decreaseQuantity(
-                                                item.cartItemId
-                                            )
+                                            decreaseQuantity(item.cartKey)
                                         }
                                         onIncrease={() =>
-                                            increaseQuantity(
-                                                item.cartItemId
-                                            )
+                                            increaseQuantity(item.cartKey)
                                         }
                                     />
 
                                     <button
                                         type="button"
                                         onClick={() =>
-                                            removeFromCart(
-                                                item.cartItemId
-                                            )
+                                            removeFromCart(item.cartKey)
                                         }
                                         className="flex items-center gap-2 text-sm font-medium text-red-600"
                                     >
@@ -171,7 +176,7 @@ export default function Cart() {
                         </Link>
 
                         <Link
-                            to="/"
+                            to="/shop"
                             className="mt-3 flex w-full items-center justify-center rounded-xl border border-[#ddcfc5] px-6 py-3.5 font-semibold text-[#5d4639]"
                         >
                             Continue shopping

@@ -26,6 +26,7 @@ import Faqs from "./pages/Faqs";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
 import { CartProvider } from "./Context/CartContext";
+import Shop2 from "./pages/Shop0";
 
 function App() {
   const location = useLocation();
@@ -46,6 +47,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/our-story" element={<Story />} />
                 <Route path="/shop" element={<Shop />} />
+                <Route path="/shop-2" element={<Shop2 />} />
                 <Route path="/brew-guides" element={<Guides />} />
                 <Route path="/faqs" element={<Faqs />} />
                 <Route path="/blog" element={<Blog />} />
