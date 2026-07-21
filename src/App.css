@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@reference "tailwindcss";
+
+body {
+    font-family: 'Raleway', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+.primary-heading {
+    @apply lg:text-5xl md:text-4xl text-3xl font-semibold text-(--primary-color);
+}
