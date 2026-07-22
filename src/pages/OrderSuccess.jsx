@@ -10,7 +10,7 @@ export default function OrderSuccess() {
     }
 
     return (
-        <section className="flex min-h-[75vh] items-center justify-center bg-[#fffaf6] px-6 py-16">
+        <section className="flex min-h-screen items-center justify-center bg-[#fffaf6] px-6">
             <div className="max-w-xl rounded-3xl border border-[#e5d8cf] bg-white p-8 text-center shadow-sm sm:p-12">
                 <CheckCircle2
                     size={72}
@@ -22,7 +22,7 @@ export default function OrderSuccess() {
                 </h1>
 
                 <p className="mt-4 leading-7 text-[#75665d]">
-                    Thank you, {order.customer.firstName}. Your order has been
+                    Thank you, {order.customer.name}. Your order has been
                     placed successfully.
                 </p>
 
