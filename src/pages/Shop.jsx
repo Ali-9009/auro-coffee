@@ -1,6 +1,5 @@
 import { useMemo, useState, useEffect } from "react";
 import { getProducts } from "../services/productService";
-
 import {
     Search,
     SlidersHorizontal,
@@ -271,13 +270,87 @@ export default function Shop() {
         }
     }, [products, highestPrice]);
 
-    if (loading) {
-        return (
-            <div className="min-h-125 grid place-items-center">
-                Loading products...
-            </div>
-        );
-    }
+    // if (loading) {
+    //     return (
+    //         <div className="min-h-125 grid place-items-center">
+    //             Loading products...
+    //         </div>
+    //     );
+    // }
+
+    // const ShopSkeleton = () => {
+    //     return (
+    //         <div className="grid gap-10 lg:grid-cols-[260px_minmax(0,1fr)]">
+    //             {/* Filter skeleton */}
+    //             <aside className="hidden h-fit rounded-3xl border border-[#e6dad2] bg-white p-6 lg:block">
+    //                 <div className="animate-pulse">
+    //                     <div className="h-7 w-24 rounded-lg bg-[#eee5df]" />
+
+    //                     <div className="mt-8">
+    //                         <div className="h-4 w-28 rounded bg-[#eee5df]" />
+
+    //                         <div className="mt-5 space-y-3">
+    //                             {[...Array(5)].map((_, index) => (
+    //                                 <div
+    //                                     key={index}
+    //                                     className="flex items-center justify-between rounded-xl"
+    //                                 >
+    //                                     <div className="h-11 w-full rounded-xl bg-[#f1e9e4]" />
+    //                                 </div>
+    //                             ))}
+    //                         </div>
+    //                     </div>
+
+    //                     <div className="mt-9 border-t border-[#eadfd7] pt-7">
+    //                         <div className="flex justify-between">
+    //                             <div className="h-4 w-28 rounded bg-[#eee5df]" />
+    //                             <div className="h-4 w-10 rounded bg-[#eee5df]" />
+    //                         </div>
+
+    //                         <div className="mt-6 h-2 w-full rounded-full bg-[#eee5df]" />
+    //                     </div>
+
+    //                     <div className="mt-9 h-40 rounded-2xl bg-[#eee5df]" />
+    //                 </div>
+    //             </aside>
+
+    //             {/* Product skeletons */}
+    //             <div>
+    //                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+    //                     {[...Array(6)].map((_, index) => (
+    //                         <div
+    //                             key={index}
+    //                             className="overflow-hidden rounded-3xl border border-[#eadfd5] bg-white p-3"
+    //                         >
+    //                             <div className="animate-pulse">
+    //                                 <div className="aspect-4/3 w-full rounded-[18px] bg-[#eee5df]" />
+
+    //                                 <div className="px-1 pb-2 pt-4">
+    //                                     <div className="flex items-center justify-between gap-3">
+    //                                         <div className="h-3 w-20 rounded bg-[#eee5df]" />
+    //                                         <div className="h-3 w-16 rounded bg-[#eee5df]" />
+    //                                     </div>
+
+    //                                     <div className="mt-4 h-6 w-3/4 rounded bg-[#eee5df]" />
+
+    //                                     <div className="mt-3 space-y-2">
+    //                                         <div className="h-3 w-full rounded bg-[#eee5df]" />
+    //                                         <div className="h-3 w-4/5 rounded bg-[#eee5df]" />
+    //                                     </div>
+
+    //                                     <div className="mt-7 flex items-center justify-between">
+    //                                         <div className="h-7 w-20 rounded bg-[#eee5df]" />
+    //                                         <div className="h-11 w-11 rounded-xl bg-[#eee5df]" />
+    //                                     </div>
+    //                                 </div>
+    //                             </div>
+    //                         </div>
+    //                     ))}
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     );
+    // };
 
     if (error) {
         return (

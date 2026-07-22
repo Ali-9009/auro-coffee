@@ -179,10 +179,99 @@ export default function ProductDetail() {
 
     if (loading) {
         return (
-            <section className="grid min-h-[70vh] place-items-center bg-[#fffaf6]">
-                <p className="text-[#75665d]">
-                    Loading product...
-                </p>
+            <section className="bg-[#fffaf6] py-10 lg:py-16">
+                <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+                    <div className="animate-pulse">
+                        {/* Breadcrumb skeleton */}
+                        <div className="mb-8 flex items-center gap-2">
+                            <div className="h-4 w-12 rounded bg-[#eadfd8]" />
+                            <div className="h-4 w-3 rounded bg-[#eadfd8]" />
+                            <div className="h-4 w-28 rounded bg-[#eadfd8]" />
+                        </div>
+
+                        <div className="grid gap-12 lg:grid-cols-2">
+                            {/* Gallery skeleton */}
+                            <div>
+                                <div className="aspect-square w-full rounded-[30px] bg-[#eee4dd]" />
+
+                                <div className="mt-4 grid grid-cols-4 gap-3">
+                                    {[...Array(4)].map((_, index) => (
+                                        <div
+                                            key={index}
+                                            className="aspect-square rounded-2xl bg-[#eee4dd]"
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Details skeleton */}
+                            <div className="flex flex-col justify-center">
+                                <div className="h-4 w-28 rounded bg-[#eadfd8]" />
+
+                                <div className="mt-4 h-12 w-4/5 rounded-xl bg-[#eadfd8]" />
+
+                                <div className="mt-4 flex items-center gap-3">
+                                    <div className="h-5 w-20 rounded bg-[#eadfd8]" />
+                                    <div className="h-4 w-32 rounded bg-[#eadfd8]" />
+                                </div>
+
+                                <div className="mt-7 space-y-3">
+                                    <div className="h-4 w-full rounded bg-[#eadfd8]" />
+                                    <div className="h-4 w-full rounded bg-[#eadfd8]" />
+                                    <div className="h-4 w-4/5 rounded bg-[#eadfd8]" />
+                                </div>
+
+                                <div className="my-7 flex items-center gap-3">
+                                    <div className="h-10 w-28 rounded-lg bg-[#eadfd8]" />
+                                    <div className="h-6 w-16 rounded bg-[#eadfd8]" />
+                                </div>
+
+                                {/* Size buttons */}
+                                <div className="flex flex-wrap gap-3">
+                                    {[...Array(3)].map((_, index) => (
+                                        <div
+                                            key={index}
+                                            className="h-12 w-24 rounded-xl bg-[#eadfd8]"
+                                        />
+                                    ))}
+                                </div>
+
+                                {/* Quantity + cart */}
+                                <div className="mt-8 flex gap-4">
+                                    <div className="h-12 w-32 rounded-xl bg-[#eadfd8]" />
+                                    <div className="h-12 flex-1 rounded-xl bg-[#eadfd8]" />
+                                </div>
+
+                                {/* Product notes */}
+                                <div className="mt-8 space-y-4 border-t border-[#e2d7cf] pt-6">
+                                    {[...Array(3)].map((_, index) => (
+                                        <div
+                                            key={index}
+                                            className="flex items-center gap-3"
+                                        >
+                                            <div className="h-5 w-5 rounded-full bg-[#eadfd8]" />
+                                            <div className="h-4 w-52 rounded bg-[#eadfd8]" />
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {/* Ingredients */}
+                                <div className="mt-8">
+                                    <div className="mb-4 h-5 w-24 rounded bg-[#eadfd8]" />
+
+                                    <div className="flex flex-wrap gap-2">
+                                        {[...Array(4)].map((_, index) => (
+                                            <div
+                                                key={index}
+                                                className="h-9 w-28 rounded-full bg-[#eadfd8]"
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         );
     }
@@ -210,7 +299,6 @@ export default function ProductDetail() {
             </section>
         );
     }
-
 
     return (
         <section className="bg-[#fffaf6] py-10 lg:py-16">
@@ -341,7 +429,7 @@ export default function ProductDetail() {
                         </div>
 
                         {/* Quantity and Cart */}
-                        <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                        <div className="mt-8 flex gap-4 flex-row">
                             <QuantityControl
                                 quantity={quantity}
                                 max={product.stock}
@@ -372,17 +460,17 @@ export default function ProductDetail() {
                         </div>
 
                         <div className="mt-8 space-y-3 border-t border-[#e2d7cf] pt-6">
-                            <div className="flex items-center gap-3 text-sm text-[#67564c]">
+                            <div className="flex items-center gap-3 text-sm text-[#67564c] font-semibold">
                                 <Check size={17} className="text-green-600" />
                                 In stock: {product.stock} available
                             </div>
 
-                            <div className="flex items-center gap-3 text-sm text-[#67564c]">
+                            <div className="flex items-center gap-3 text-sm text-[#67564c] font-semibold">
                                 <Check size={17} className="text-green-600" />
                                 Freshly prepared after ordering
                             </div>
 
-                            <div className="flex items-center gap-3 text-sm text-[#67564c]">
+                            <div className="flex items-center gap-3 text-sm text-[#67564c] font-semibold">
                                 <Check size={17} className="text-green-600" />
                                 Secure checkout
                             </div>

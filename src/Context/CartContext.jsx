@@ -22,49 +22,7 @@ export function CartProvider({ children }) {
         localStorage.setItem("coffee-cart", JSON.stringify(cartItems));
     }, [cartItems]);
 
-    // const addToCart = (product, selectedSize, quantity = 1) => {
-    //     const size =
-    //         product.sizes.find((item) => item.value === selectedSize) ||
-    //         product.sizes[0];
-
-    //     const finalPrice = product.price + size.extraPrice;
-
-    //     const cartItemId = `${product.id}-${size.value}`;
-
-    //     setCartItems((currentItems) => {
-    //         const existingItem = currentItems.find(
-    //             (item) => item.cartItemId === cartItemId
-    //         );
-
-    //         if (existingItem) {
-    //             return currentItems.map((item) =>
-    //                 item.cartItemId === cartItemId
-    //                     ? {
-    //                         ...item,
-    //                         quantity: item.quantity + quantity,
-    //                     }
-    //                     : item
-    //             );
-    //         }
-
-    //         return [
-    //             ...currentItems,
-    //             {
-    //                 cartItemId,
-    //                 productId: product.id,
-    //                 slug: product.slug,
-    //                 name: product.name,
-    //                 image: product.image,
-    //                 size: size.label,
-    //                 sizeValue: size.value,
-    //                 price: finalPrice,
-    //                 quantity,
-    //                 stock: product.stock,
-    //             },
-    //         ];
-    //     });
-    // };
-
+    
     const addToCart = (product, quantity = 1) => {
         const cartKey = `${product.id}-${product.selectedSize?.id || "standard"}`;
 
