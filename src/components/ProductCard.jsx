@@ -1,4 +1,4 @@
-import { ShoppingBag, Star, Check, ClosedCaption } from "lucide-react";
+import { ShoppingBag, Star, Check } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useCart } from "../Context/CartContext";
@@ -7,7 +7,7 @@ export default function ProductCard({ product }) {
     const { addToCart } = useCart();
     const navigate = useNavigate();
 
-    const defaultSize = product.sizes[0];
+    const defaultSize = product.sizes?.[0] || null;
 
     const showCartToast = () => {
         toast.custom(
@@ -43,18 +43,18 @@ export default function ProductCard({ product }) {
                             </h4>
 
                             <div className="mt-1 flex items-center gap-2 text-xs text-[#85746a]">
-                                <span>{defaultSize.label}</span>
+                                <span>{defaultSize?.name || "Standard"}</span>
                                 <span className="h-1 w-1 rounded-full bg-[#b7aaa2]" />
                                 <span>Qty: 1</span>
                             </div>
 
-                            <p className="mt-1 text-sm font-bold text-[#84280d]">
+                            <span className="text-xl font-bold text-[#321b10]">
                                 $
                                 {(
                                     product.price +
-                                    defaultSize.extraPrice
+                                    (defaultSize?.extraPrice || 0)
                                 ).toFixed(2)}
-                            </p>
+                            </span>
                         </div>
 
                         {/* Close */}
@@ -102,7 +102,36 @@ export default function ProductCard({ product }) {
         event.preventDefault();
         event.stopPropagation();
 
-        addToCart(product, defaultSize.value, 1);
+        if (product.stock <= 0) {
+            toast.error("This product is out of stock.");
+            return;
+        }
+
+        const finalPrice =
+            product.price +
+            (defaultSize?.extraPrice || 0);
+
+        const cartItem = {
+            id: product.id,
+            productId: product.id,
+            slug: product.slug,
+            name: product.name,
+            image: product.image,
+            basePrice: product.price,
+            price: finalPrice,
+            stock: product.stock,
+
+            selectedSize: defaultSize
+                ? {
+                    id: defaultSize.id,
+                    name: defaultSize.name,
+                    extraPrice:
+                        defaultSize.extraPrice,
+                }
+                : null,
+        };
+
+        addToCart(cartItem, 1);
         showCartToast();
     };
 

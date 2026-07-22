@@ -246,29 +246,17 @@ export default function Shop() {
 
                 const data = await getProducts();
 
-                const formattedProducts = data.map((product) => ({
-                    ...product,
-
-                    price: product.price / 100,
-
-                    oldPrice: product.old_price
-                        ? product.old_price / 100
-                        : null,
-
-                    shortDescription:
-                        product.short_description,
-
-                    sizes:
-                        product.product_sizes?.map((size) => ({
-                            id: size.id,
-                            name: size.name,
-                            extraPrice: size.extra_price / 100,
-                        })) || [],
-                }));
-
-                setProducts(formattedProducts);
+                setProducts(data);
             } catch (error) {
-                setError(error.message);
+                console.error(
+                    "Could not load shop products:",
+                    error
+                );
+
+                setError(
+                    error.message ||
+                    "Could not load products."
+                );
             } finally {
                 setLoading(false);
             }

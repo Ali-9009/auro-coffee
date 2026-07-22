@@ -1,14 +1,41 @@
-import { useMemo, useState } from "react";
-import { products } from "../data/products";
+import { useEffect, useMemo, useState } from "react";
+import { getProducts } from "../services/productService";
 import ProductCard from "./ProductCard";
 
 export default function ProductSection() {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [activeCategory, setActiveCategory] = useState("All");
 
-    const categories = [
-        "All",
-        ...new Set(products.map((product) => product.category)),
-    ];
+    useEffect(() => {
+        async function loadProducts() {
+            try {
+                const data = await getProducts();
+                setProducts(data);
+            } catch (error) {
+                console.error(
+                    "Could not load products:",
+                    error
+                );
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        loadProducts();
+    }, []);
+
+    const categories = useMemo(
+        () => [
+            "All",
+            ...new Set(
+                products
+                    .map((product) => product.category)
+                    .filter(Boolean)
+            ),
+        ],
+        [products]
+    );
 
     const filteredProducts = useMemo(() => {
         if (activeCategory === "All") {
@@ -16,9 +43,10 @@ export default function ProductSection() {
         }
 
         return products.filter(
-            (product) => product.category === activeCategory
+            (product) =>
+                product.category === activeCategory
         );
-    }, [activeCategory]);
+    }, [products, activeCategory]);
 
     return (
         <section className="bg-[#fffaf6] py-16 lg:py-24">
@@ -44,7 +72,9 @@ export default function ProductSection() {
                             <button
                                 key={category}
                                 type="button"
-                                onClick={() => setActiveCategory(category)}
+                                onClick={() =>
+                                    setActiveCategory(category)
+                                }
                                 className={`shrink-0 rounded-full px-5 py-2.5 text-sm font-medium transition ${activeCategory === category
                                         ? "bg-[#84280d] text-white"
                                         : "border border-[#ddcfc5] bg-white text-[#5d4639] hover:border-[#84280d] hover:text-[#84280d]"
@@ -56,14 +86,29 @@ export default function ProductSection() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {filteredProducts.map((product) => (
-                        <ProductCard
-                            key={product.id}
-                            product={product}
-                        />
-                    ))}
-                </div>
+                {loading ? (
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                        {[...Array(8)].map((_, index) => (
+                            <div
+                                key={index}
+                                className="h-96 animate-pulse rounded-3xl bg-[#f3ece7]"
+                            />
+                        ))}
+                    </div>
+                ) : filteredProducts.length === 0 ? (
+                    <div className="py-20 text-center text-[#75665d]">
+                        No products found.
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                        {filteredProducts.map((product) => (
+                            <ProductCard
+                                key={product.id}
+                                product={product}
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
         </section>
     );

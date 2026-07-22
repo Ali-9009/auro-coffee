@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useCart } from "../Context/CartContext";
+import toast from "react-hot-toast";
+import { createOrder } from "../services/orderService";
 
 export default function Checkout() {
     const navigate = useNavigate();
@@ -26,8 +28,13 @@ export default function Checkout() {
     });
 
     const [submitting, setSubmitting] = useState(false);
+    const [orderCompleted, setOrderCompleted] =
+        useState(false);
 
-    if (cartItems.length === 0) {
+    if (
+        cartItems.length === 0 &&
+        !orderCompleted
+    ) {
         return <Navigate to="/cart" replace />;
     }
 
@@ -43,32 +50,37 @@ export default function Checkout() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        if (submitting) return;
+
         setSubmitting(true);
 
         try {
-            const order = {
+            const order = await createOrder({
                 customer: form,
-                items: cartItems,
-                subtotal,
-                deliveryFee,
-                tax,
-                total,
-                createdAt: new Date().toISOString(),
-            };
+                cartItems,
+                paymentMethod: form.paymentMethod,
+            });
 
-            console.log("Order ready for backend:", order);
-
-            await new Promise((resolve) =>
-                setTimeout(resolve, 1000)
-            );
-
-            clearCart();
+            setOrderCompleted(true);
 
             navigate("/order-success", {
+                replace: true,
                 state: {
                     order,
                 },
             });
+
+            clearCart();
+        } catch (error) {
+            console.error(
+                "Order creation failed:",
+                error
+            );
+
+            toast.error(
+                error.message ||
+                "Could not place your order."
+            );
         } finally {
             setSubmitting(false);
         }
@@ -229,7 +241,7 @@ export default function Checkout() {
                         <div className="mt-6 max-h-72 space-y-4 overflow-y-auto">
                             {cartItems.map((item) => (
                                 <div
-                                    key={item.cartItemId}
+                                    key={item.cartKey}
                                     className="flex gap-3"
                                 >
                                     <img
@@ -244,7 +256,10 @@ export default function Checkout() {
                                         </p>
 
                                         <p className="text-xs text-[#8a786e]">
-                                            {item.size} × {item.quantity}
+                                            {item.selectedSize?.name
+                                                ? `${item.selectedSize.name} · `
+                                                : ""}
+                                            Qty: {item.quantity}
                                         </p>
                                     </div>
 
