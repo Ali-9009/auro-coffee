@@ -6,12 +6,22 @@ import {
     useState,
 } from "react";
 
+import {
+    calculateCartTotals,
+    normalizePrice,
+} from "../utils/pricing";
+
 const CartContext = createContext(null);
+
+const CART_STORAGE_KEY = "coffee-cart-v2";
 
 export function CartProvider({ children }) {
     const [cartItems, setCartItems] = useState(() => {
         try {
-            const savedCart = localStorage.getItem("coffee-cart");
+            const savedCart = localStorage.getItem(
+                CART_STORAGE_KEY
+            );
+
             return savedCart ? JSON.parse(savedCart) : [];
         } catch {
             return [];
@@ -19,12 +29,23 @@ export function CartProvider({ children }) {
     });
 
     useEffect(() => {
-        localStorage.setItem("coffee-cart", JSON.stringify(cartItems));
+        localStorage.setItem(
+            CART_STORAGE_KEY,
+            JSON.stringify(cartItems)
+        );
     }, [cartItems]);
 
-    
     const addToCart = (product, quantity = 1) => {
-        const cartKey = `${product.id}-${product.selectedSize?.id || "standard"}`;
+        const selectedSizeId =
+            product.selectedSize?.id || "standard";
+
+        const cartKey = `${product.id}-${selectedSizeId}`;
+
+        const normalizedProduct = {
+            ...product,
+            price: normalizePrice(product.price),
+            stock: Math.max(0, Number(product.stock) || 0),
+        };
 
         setCartItems((currentItems) => {
             const existingItem = currentItems.find(
@@ -38,7 +59,7 @@ export function CartProvider({ children }) {
                             ...item,
                             quantity: Math.min(
                                 item.quantity + quantity,
-                                product.stock
+                                normalizedProduct.stock
                             ),
                         }
                         : item
@@ -48,9 +69,12 @@ export function CartProvider({ children }) {
             return [
                 ...currentItems,
                 {
-                    ...product,
+                    ...normalizedProduct,
                     cartKey,
-                    quantity,
+                    quantity: Math.min(
+                        Math.max(1, quantity),
+                        normalizedProduct.stock
+                    ),
                 },
             ];
         });
@@ -103,24 +127,22 @@ export function CartProvider({ children }) {
     const cartCount = useMemo(
         () =>
             cartItems.reduce(
-                (total, item) => total + item.quantity,
+                (total, item) =>
+                    total + Number(item.quantity || 0),
                 0
             ),
         [cartItems]
     );
 
-    const subtotal = useMemo(
-        () =>
-            cartItems.reduce(
-                (total, item) => total + item.price * item.quantity,
-                0
-            ),
+    const {
+        subtotal,
+        deliveryFee,
+        tax,
+        total,
+    } = useMemo(
+        () => calculateCartTotals(cartItems),
         [cartItems]
     );
-
-    const deliveryFee = subtotal > 0 ? 2.5 : 0;
-    const tax = subtotal * 0.05;
-    const total = subtotal + deliveryFee + tax;
 
     const value = {
         cartItems,
@@ -147,7 +169,9 @@ export function useCart() {
     const context = useContext(CartContext);
 
     if (!context) {
-        throw new Error("useCart must be used inside CartProvider");
+        throw new Error(
+            "useCart must be used inside CartProvider"
+        );
     }
 
     return context;

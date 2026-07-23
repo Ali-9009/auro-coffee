@@ -1,0 +1,895 @@
+[
+  {
+    "database_info": {
+      "rls": [
+        {
+          "force_rls": false,
+          "table_name": "order_items",
+          "rls_enabled": true
+        },
+        {
+          "force_rls": false,
+          "table_name": "orders",
+          "rls_enabled": true
+        }
+      ],
+      "columns": [
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 1,
+          "udt_name": "uuid",
+          "data_type": "uuid",
+          "table_name": "admin_orders_view",
+          "column_name": "id"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 2,
+          "udt_name": "text",
+          "data_type": "text",
+          "table_name": "admin_orders_view",
+          "column_name": "customer_name"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 3,
+          "udt_name": "text",
+          "data_type": "text",
+          "table_name": "admin_orders_view",
+          "column_name": "customer_email"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 4,
+          "udt_name": "text",
+          "data_type": "text",
+          "table_name": "admin_orders_view",
+          "column_name": "customer_phone"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 5,
+          "udt_name": "jsonb",
+          "data_type": "jsonb",
+          "table_name": "admin_orders_view",
+          "column_name": "shipping_address"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 6,
+          "udt_name": "int4",
+          "data_type": "integer",
+          "table_name": "admin_orders_view",
+          "column_name": "subtotal"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 7,
+          "udt_name": "int4",
+          "data_type": "integer",
+          "table_name": "admin_orders_view",
+          "column_name": "shipping_amount"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 8,
+          "udt_name": "int4",
+          "data_type": "integer",
+          "table_name": "admin_orders_view",
+          "column_name": "tax_amount"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 9,
+          "udt_name": "int4",
+          "data_type": "integer",
+          "table_name": "admin_orders_view",
+          "column_name": "total"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 10,
+          "udt_name": "text",
+          "data_type": "text",
+          "table_name": "admin_orders_view",
+          "column_name": "currency"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 11,
+          "udt_name": "text",
+          "data_type": "text",
+          "table_name": "admin_orders_view",
+          "column_name": "payment_method"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 12,
+          "udt_name": "text",
+          "data_type": "text",
+          "table_name": "admin_orders_view",
+          "column_name": "payment_status"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 13,
+          "udt_name": "text",
+          "data_type": "text",
+          "table_name": "admin_orders_view",
+          "column_name": "order_status"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 14,
+          "udt_name": "timestamptz",
+          "data_type": "timestamp with time zone",
+          "table_name": "admin_orders_view",
+          "column_name": "created_at"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 15,
+          "udt_name": "timestamptz",
+          "data_type": "timestamp with time zone",
+          "table_name": "admin_orders_view",
+          "column_name": "updated_at"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 16,
+          "udt_name": "int8",
+          "data_type": "bigint",
+          "table_name": "admin_orders_view",
+          "column_name": "total_items"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 17,
+          "udt_name": "text",
+          "data_type": "text",
+          "table_name": "admin_orders_view",
+          "column_name": "items_summary"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 18,
+          "udt_name": "jsonb",
+          "data_type": "jsonb",
+          "table_name": "admin_orders_view",
+          "column_name": "items"
+        },
+        {
+          "default": "gen_random_uuid()",
+          "nullable": "NO",
+          "position": 1,
+          "udt_name": "uuid",
+          "data_type": "uuid",
+          "table_name": "order_items",
+          "column_name": "id"
+        },
+        {
+          "default": null,
+          "nullable": "NO",
+          "position": 2,
+          "udt_name": "uuid",
+          "data_type": "uuid",
+          "table_name": "order_items",
+          "column_name": "order_id"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 3,
+          "udt_name": "uuid",
+          "data_type": "uuid",
+          "table_name": "order_items",
+          "column_name": "product_id"
+        },
+        {
+          "default": null,
+          "nullable": "NO",
+          "position": 4,
+          "udt_name": "text",
+          "data_type": "text",
+          "table_name": "order_items",
+          "column_name": "product_name"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 5,
+          "udt_name": "text",
+          "data_type": "text",
+          "table_name": "order_items",
+          "column_name": "size_name"
+        },
+        {
+          "default": null,
+          "nullable": "NO",
+          "position": 6,
+          "udt_name": "int4",
+          "data_type": "integer",
+          "table_name": "order_items",
+          "column_name": "quantity"
+        },
+        {
+          "default": null,
+          "nullable": "NO",
+          "position": 7,
+          "udt_name": "int4",
+          "data_type": "integer",
+          "table_name": "order_items",
+          "column_name": "unit_price"
+        },
+        {
+          "default": null,
+          "nullable": "NO",
+          "position": 8,
+          "udt_name": "int4",
+          "data_type": "integer",
+          "table_name": "order_items",
+          "column_name": "line_total"
+        },
+        {
+          "default": "now()",
+          "nullable": "YES",
+          "position": 9,
+          "udt_name": "timestamptz",
+          "data_type": "timestamp with time zone",
+          "table_name": "order_items",
+          "column_name": "created_at"
+        },
+        {
+          "default": "gen_random_uuid()",
+          "nullable": "NO",
+          "position": 1,
+          "udt_name": "uuid",
+          "data_type": "uuid",
+          "table_name": "orders",
+          "column_name": "id"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 2,
+          "udt_name": "text",
+          "data_type": "text",
+          "table_name": "orders",
+          "column_name": "stripe_session_id"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 3,
+          "udt_name": "text",
+          "data_type": "text",
+          "table_name": "orders",
+          "column_name": "customer_name"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 4,
+          "udt_name": "text",
+          "data_type": "text",
+          "table_name": "orders",
+          "column_name": "customer_email"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 5,
+          "udt_name": "text",
+          "data_type": "text",
+          "table_name": "orders",
+          "column_name": "customer_phone"
+        },
+        {
+          "default": null,
+          "nullable": "YES",
+          "position": 6,
+          "udt_name": "jsonb",
+          "data_type": "jsonb",
+          "table_name": "orders",
+          "column_name": "shipping_address"
+        },
+        {
+          "default": "0",
+          "nullable": "NO",
+          "position": 7,
+          "udt_name": "int4",
+          "data_type": "integer",
+          "table_name": "orders",
+          "column_name": "subtotal"
+        },
+        {
+          "default": "0",
+          "nullable": "NO",
+          "position": 8,
+          "udt_name": "int4",
+          "data_type": "integer",
+          "table_name": "orders",
+          "column_name": "shipping_amount"
+        },
+        {
+          "default": "0",
+          "nullable": "NO",
+          "position": 9,
+          "udt_name": "int4",
+          "data_type": "integer",
+          "table_name": "orders",
+          "column_name": "tax_amount"
+        },
+        {
+          "default": "0",
+          "nullable": "NO",
+          "position": 10,
+          "udt_name": "int4",
+          "data_type": "integer",
+          "table_name": "orders",
+          "column_name": "total"
+        },
+        {
+          "default": "'usd'::text",
+          "nullable": "NO",
+          "position": 11,
+          "udt_name": "text",
+          "data_type": "text",
+          "table_name": "orders",
+          "column_name": "currency"
+        },
+        {
+          "default": "'pending'::text",
+          "nullable": "NO",
+          "position": 12,
+          "udt_name": "text",
+          "data_type": "text",
+          "table_name": "orders",
+          "column_name": "payment_status"
+        },
+        {
+          "default": "'pending'::text",
+          "nullable": "NO",
+          "position": 13,
+          "udt_name": "text",
+          "data_type": "text",
+          "table_name": "orders",
+          "column_name": "order_status"
+        },
+        {
+          "default": "now()",
+          "nullable": "YES",
+          "position": 14,
+          "udt_name": "timestamptz",
+          "data_type": "timestamp with time zone",
+          "table_name": "orders",
+          "column_name": "created_at"
+        },
+        {
+          "default": "now()",
+          "nullable": "YES",
+          "position": 15,
+          "udt_name": "timestamptz",
+          "data_type": "timestamp with time zone",
+          "table_name": "orders",
+          "column_name": "updated_at"
+        },
+        {
+          "default": "'cash'::text",
+          "nullable": "YES",
+          "position": 23,
+          "udt_name": "text",
+          "data_type": "text",
+          "table_name": "orders",
+          "column_name": "payment_method"
+        }
+      ],
+      "policies": [
+        {
+          "roles": ["authenticated"],
+          "using": "( SELECT is_admin() AS is_admin)",
+          "command": "SELECT",
+          "table_name": "order_items",
+          "with_check": null,
+          "policy_name": "Admins can read order items"
+        },
+        {
+          "roles": ["anon"],
+          "using": null,
+          "command": "INSERT",
+          "table_name": "order_items",
+          "with_check": "true",
+          "policy_name": "Guests can create order items"
+        },
+        {
+          "roles": ["authenticated"],
+          "using": "( SELECT is_admin() AS is_admin)",
+          "command": "SELECT",
+          "table_name": "orders",
+          "with_check": null,
+          "policy_name": "Admins can read orders"
+        },
+        {
+          "roles": ["anon"],
+          "using": null,
+          "command": "INSERT",
+          "table_name": "orders",
+          "with_check": "true",
+          "policy_name": "Guests can create orders"
+        },
+        {
+          "roles": ["anon"],
+          "using": "true",
+          "command": "SELECT",
+          "table_name": "orders",
+          "with_check": null,
+          "policy_name": "Guests can read created orders"
+        }
+      ],
+      "row_counts": [
+        {
+          "source": "admin_orders_view",
+          "total_rows": 11
+        },
+        {
+          "source": "order_items",
+          "total_rows": 19
+        },
+        {
+          "source": "orders",
+          "total_rows": 11
+        }
+      ],
+      "foreign_keys": [
+        {
+          "table_name": "order_items",
+          "column_name": "order_id",
+          "foreign_table": "orders",
+          "foreign_column": "id",
+          "constraint_name": "order_items_order_id_fkey"
+        },
+        {
+          "table_name": "order_items",
+          "column_name": "product_id",
+          "foreign_table": "products",
+          "foreign_column": "id",
+          "constraint_name": "order_items_product_id_fkey"
+        }
+      ],
+      "latest_orders": [
+        {
+          "id": "a05b5066-4015-4494-9ff0-034878e9a047",
+          "total": 21255,
+          "currency": "usd",
+          "subtotal": 20005,
+          "created_at": "2026-07-23T11:03:11.871433+00:00",
+          "tax_amount": 1000,
+          "updated_at": "2026-07-23T11:03:11.871433+00:00",
+          "order_status": "pending",
+          "customer_name": "Umer Faisal",
+          "customer_email": "umer@detectorwarehouse.com",
+          "customer_phone": "7063508012",
+          "payment_method": "cash",
+          "payment_status": "pending",
+          "shipping_amount": 250,
+          "shipping_address": {
+            "city": "West Point",
+            "address": "sda",
+            "country": "US",
+            "lastName": "Faisal",
+            "firstName": "Umer",
+            "postalCode": "sad"
+          },
+          "stripe_session_id": null
+        },
+        {
+          "id": "c7e6af1a-a80a-4440-a6b8-0a7c6beed1a6",
+          "total": 321,
+          "currency": "usd",
+          "subtotal": 68,
+          "created_at": "2026-07-23T10:21:19.254779+00:00",
+          "tax_amount": 3,
+          "updated_at": "2026-07-23T10:21:19.254779+00:00",
+          "order_status": "pending",
+          "customer_name": "Umer Faisal",
+          "customer_email": "umer@detectorwarehouse.com",
+          "customer_phone": "7063508012",
+          "payment_method": "cash",
+          "payment_status": "pending",
+          "shipping_amount": 250,
+          "shipping_address": {
+            "city": "West Point",
+            "address": "sda",
+            "country": "US",
+            "lastName": "Faisal",
+            "firstName": "Umer",
+            "postalCode": "sad"
+          },
+          "stripe_session_id": null
+        },
+        {
+          "id": "04e35965-076c-4868-aaf9-780f2b9b6dd4",
+          "total": 4818,
+          "currency": "usd",
+          "subtotal": 4350,
+          "created_at": "2026-07-22T18:01:10.976032+00:00",
+          "tax_amount": 218,
+          "updated_at": "2026-07-22T18:01:10.976032+00:00",
+          "order_status": "pending",
+          "customer_name": "Ali Hasan",
+          "customer_email": "br6332160@gmail.com",
+          "customer_phone": "031900225261231",
+          "payment_method": "cash",
+          "payment_status": "pending",
+          "shipping_amount": 250,
+          "shipping_address": {
+            "city": "Karachi",
+            "address": "Nazimabad",
+            "country": "US",
+            "lastName": "Hasan",
+            "firstName": "Ali",
+            "postalCode": "74600"
+          },
+          "stripe_session_id": null
+        },
+        {
+          "id": "e3e2c21b-95e9-4705-bf48-1acf4f94e8eb",
+          "total": 1353,
+          "currency": "usd",
+          "subtotal": 1050,
+          "created_at": "2026-07-22T16:23:28.554521+00:00",
+          "tax_amount": 53,
+          "updated_at": "2026-07-22T16:23:28.554521+00:00",
+          "order_status": "pending",
+          "customer_name": "Umer Faisal",
+          "customer_email": "umer@detectorwarehouse.com",
+          "customer_phone": "7063508012",
+          "payment_method": "cash",
+          "payment_status": "pending",
+          "shipping_amount": 250,
+          "shipping_address": {
+            "city": "West Point",
+            "address": "sda",
+            "country": "US",
+            "lastName": "Faisal",
+            "firstName": "Umer",
+            "postalCode": "sad"
+          },
+          "stripe_session_id": null
+        },
+        {
+          "id": "40913426-77dd-47fa-9d5d-a8978ca7b763",
+          "total": 1353,
+          "currency": "usd",
+          "subtotal": 1050,
+          "created_at": "2026-07-22T13:30:08.865894+00:00",
+          "tax_amount": 53,
+          "updated_at": "2026-07-22T13:30:08.865894+00:00",
+          "order_status": "pending",
+          "customer_name": "Ali Hasan",
+          "customer_email": "br6332160@gmail.com",
+          "customer_phone": "031900225261231",
+          "payment_method": "cash",
+          "payment_status": "pending",
+          "shipping_amount": 250,
+          "shipping_address": {
+            "city": "Karachi",
+            "address": "Nazimabad",
+            "country": "US",
+            "lastName": "Hasan",
+            "firstName": "Ali",
+            "postalCode": "74600"
+          },
+          "stripe_session_id": null
+        }
+      ],
+      "latest_order_items": [
+        {
+          "id": "38415f84-dc11-4954-b669-3b555612e41c",
+          "order_id": "a05b5066-4015-4494-9ff0-034878e9a047",
+          "quantity": 1,
+          "size_name": "full",
+          "created_at": "2026-07-23T11:03:12.669569+00:00",
+          "line_total": 20005,
+          "product_id": "ec3459fb-57e9-49b8-8eb0-24860606529f",
+          "unit_price": 20005,
+          "product_name": "Chocolate Latte"
+        },
+        {
+          "id": "b9798eca-cb33-4801-80ed-3d1adcbbef42",
+          "order_id": "c7e6af1a-a80a-4440-a6b8-0a7c6beed1a6",
+          "quantity": 2,
+          "size_name": null,
+          "created_at": "2026-07-23T10:21:19.532009+00:00",
+          "line_total": 68,
+          "product_id": null,
+          "unit_price": 34,
+          "product_name": "Umer Faisal"
+        },
+        {
+          "id": "1cef5690-df08-43c5-bb0f-08b4759df593",
+          "order_id": "04e35965-076c-4868-aaf9-780f2b9b6dd4",
+          "quantity": 1,
+          "size_name": null,
+          "created_at": "2026-07-22T18:01:11.802429+00:00",
+          "line_total": 500,
+          "product_id": "ec3459fb-57e9-49b8-8eb0-24860606529f",
+          "unit_price": 500,
+          "product_name": "Chocolate Latte"
+        },
+        {
+          "id": "45bef45f-9cfa-4153-8339-808fc96f06a5",
+          "order_id": "04e35965-076c-4868-aaf9-780f2b9b6dd4",
+          "quantity": 7,
+          "size_name": "Small",
+          "created_at": "2026-07-22T18:01:11.802429+00:00",
+          "line_total": 3850,
+          "product_id": "183e8f8f-ca18-41c2-9804-5a1a7a12f5f2",
+          "unit_price": 550,
+          "product_name": "Mocha Latte"
+        },
+        {
+          "id": "aa376b02-2302-4146-92d3-27e9398dedb8",
+          "order_id": "e3e2c21b-95e9-4705-bf48-1acf4f94e8eb",
+          "quantity": 1,
+          "size_name": "Small",
+          "created_at": "2026-07-22T16:23:29.334354+00:00",
+          "line_total": 550,
+          "product_id": "183e8f8f-ca18-41c2-9804-5a1a7a12f5f2",
+          "unit_price": 550,
+          "product_name": "Mocha Latte"
+        }
+      ],
+      "latest_admin_orders": [
+        {
+          "id": "0009e63b-0040-45cb-84c0-599e1e64315f",
+          "items": [
+            {
+              "id": "2d33a8d9-aba8-4bad-8819-e3de3660aa27",
+              "quantity": 1,
+              "size_name": "Small",
+              "line_total": 550,
+              "product_id": "183e8f8f-ca18-41c2-9804-5a1a7a12f5f2",
+              "unit_price": 550,
+              "product_name": "Mocha Latte"
+            }
+          ],
+          "total": 828,
+          "currency": "usd",
+          "subtotal": 550,
+          "created_at": "2026-07-22T12:58:42.747826+00:00",
+          "tax_amount": 28,
+          "updated_at": "2026-07-22T12:58:42.747826+00:00",
+          "total_items": 1,
+          "order_status": "pending",
+          "customer_name": "Umer Faisal",
+          "items_summary": "Mocha Latte (Small) × 1",
+          "customer_email": "umer@detectorwarehouse.com",
+          "customer_phone": "7063508012",
+          "payment_method": "cash",
+          "payment_status": "pending",
+          "shipping_amount": 250,
+          "shipping_address": {
+            "city": "West Point",
+            "address": "sda",
+            "country": "US",
+            "lastName": "Faisal",
+            "firstName": "Umer",
+            "postalCode": "sad"
+          }
+        },
+        {
+          "id": "04e35965-076c-4868-aaf9-780f2b9b6dd4",
+          "items": [
+            {
+              "id": "1cef5690-df08-43c5-bb0f-08b4759df593",
+              "quantity": 1,
+              "size_name": null,
+              "line_total": 500,
+              "product_id": "ec3459fb-57e9-49b8-8eb0-24860606529f",
+              "unit_price": 500,
+              "product_name": "Chocolate Latte"
+            },
+            {
+              "id": "45bef45f-9cfa-4153-8339-808fc96f06a5",
+              "quantity": 7,
+              "size_name": "Small",
+              "line_total": 3850,
+              "product_id": "183e8f8f-ca18-41c2-9804-5a1a7a12f5f2",
+              "unit_price": 550,
+              "product_name": "Mocha Latte"
+            }
+          ],
+          "total": 4818,
+          "currency": "usd",
+          "subtotal": 4350,
+          "created_at": "2026-07-22T18:01:10.976032+00:00",
+          "tax_amount": 218,
+          "updated_at": "2026-07-22T18:01:10.976032+00:00",
+          "total_items": 8,
+          "order_status": "pending",
+          "customer_name": "Ali Hasan",
+          "items_summary": "Chocolate Latte × 1, Mocha Latte (Small) × 7",
+          "customer_email": "br6332160@gmail.com",
+          "customer_phone": "031900225261231",
+          "payment_method": "cash",
+          "payment_status": "pending",
+          "shipping_amount": 250,
+          "shipping_address": {
+            "city": "Karachi",
+            "address": "Nazimabad",
+            "country": "US",
+            "lastName": "Hasan",
+            "firstName": "Ali",
+            "postalCode": "74600"
+          }
+        },
+        {
+          "id": "40913426-77dd-47fa-9d5d-a8978ca7b763",
+          "items": [
+            {
+              "id": "7b50d8bb-093f-4a69-9293-07eecbd4c46b",
+              "quantity": 1,
+              "size_name": null,
+              "line_total": 500,
+              "product_id": "ec3459fb-57e9-49b8-8eb0-24860606529f",
+              "unit_price": 500,
+              "product_name": "Chocolate Latte"
+            },
+            {
+              "id": "0e1c9a32-334b-4873-9cb3-71ed2237296a",
+              "quantity": 1,
+              "size_name": "Small",
+              "line_total": 550,
+              "product_id": "183e8f8f-ca18-41c2-9804-5a1a7a12f5f2",
+              "unit_price": 550,
+              "product_name": "Mocha Latte"
+            }
+          ],
+          "total": 1353,
+          "currency": "usd",
+          "subtotal": 1050,
+          "created_at": "2026-07-22T13:30:08.865894+00:00",
+          "tax_amount": 53,
+          "updated_at": "2026-07-22T13:30:08.865894+00:00",
+          "total_items": 2,
+          "order_status": "pending",
+          "customer_name": "Ali Hasan",
+          "items_summary": "Chocolate Latte × 1, Mocha Latte (Small) × 1",
+          "customer_email": "br6332160@gmail.com",
+          "customer_phone": "031900225261231",
+          "payment_method": "cash",
+          "payment_status": "pending",
+          "shipping_amount": 250,
+          "shipping_address": {
+            "city": "Karachi",
+            "address": "Nazimabad",
+            "country": "US",
+            "lastName": "Hasan",
+            "firstName": "Ali",
+            "postalCode": "74600"
+          }
+        },
+        {
+          "id": "798bd65b-f660-40c8-8358-03d0d02ccba6",
+          "items": [
+            {
+              "id": "e9742586-63f3-49fe-bb71-595d791c9540",
+              "quantity": 4,
+              "size_name": "Large",
+              "line_total": 3000,
+              "product_id": "183e8f8f-ca18-41c2-9804-5a1a7a12f5f2",
+              "unit_price": 750,
+              "product_name": "Mocha Latte"
+            },
+            {
+              "id": "ece7ec45-4950-4602-8099-5ea4b2c45af2",
+              "quantity": 4,
+              "size_name": "Medium",
+              "line_total": 2600,
+              "product_id": "183e8f8f-ca18-41c2-9804-5a1a7a12f5f2",
+              "unit_price": 650,
+              "product_name": "Mocha Latte"
+            },
+            {
+              "id": "cc07a916-bee0-4f81-8c3a-1b8da753376d",
+              "quantity": 1,
+              "size_name": "Small",
+              "line_total": 550,
+              "product_id": "183e8f8f-ca18-41c2-9804-5a1a7a12f5f2",
+              "unit_price": 550,
+              "product_name": "Mocha Latte"
+            }
+          ],
+          "total": 6708,
+          "currency": "usd",
+          "subtotal": 6150,
+          "created_at": "2026-07-22T12:56:11.12117+00:00",
+          "tax_amount": 308,
+          "updated_at": "2026-07-22T12:56:11.12117+00:00",
+          "total_items": 9,
+          "order_status": "pending",
+          "customer_name": "Umer Faisal",
+          "items_summary": "Mocha Latte (Large) × 4, Mocha Latte (Medium) × 4, Mocha Latte (Small) × 1",
+          "customer_email": "umer@detectorwarehouse.com",
+          "customer_phone": "7063508012",
+          "payment_method": "cash",
+          "payment_status": "pending",
+          "shipping_amount": 250,
+          "shipping_address": {
+            "city": "West Point",
+            "address": "sda",
+            "country": "US",
+            "lastName": "Faisal",
+            "firstName": "Umer",
+            "postalCode": "sad"
+          }
+        },
+        {
+          "id": "7f2dd375-6e1c-477c-80ff-697b2c2fe8c2",
+          "items": [
+            {
+              "id": "03e3afe5-4b2e-4e02-b0c6-104f57b179de",
+              "quantity": 2,
+              "size_name": null,
+              "line_total": 1000,
+              "product_id": "ec3459fb-57e9-49b8-8eb0-24860606529f",
+              "unit_price": 500,
+              "product_name": "Chocolate Latte"
+            },
+            {
+              "id": "830b021a-8e97-4fbd-8fae-0b0396a08df6",
+              "quantity": 1,
+              "size_name": "Small",
+              "line_total": 550,
+              "product_id": "183e8f8f-ca18-41c2-9804-5a1a7a12f5f2",
+              "unit_price": 550,
+              "product_name": "Mocha Latte"
+            }
+          ],
+          "total": 1878,
+          "currency": "usd",
+          "subtotal": 1550,
+          "created_at": "2026-07-22T13:18:49.50594+00:00",
+          "tax_amount": 78,
+          "updated_at": "2026-07-22T13:18:49.50594+00:00",
+          "total_items": 3,
+          "order_status": "pending",
+          "customer_name": "Umer Faisal",
+          "items_summary": "Chocolate Latte × 2, Mocha Latte (Small) × 1",
+          "customer_email": "umer@detectorwarehouse.com",
+          "customer_phone": "7063508012",
+          "payment_method": "cash",
+          "payment_status": "pending",
+          "shipping_amount": 250,
+          "shipping_address": {
+            "city": "West Point",
+            "address": "sda",
+            "country": "US",
+            "lastName": "Faisal",
+            "firstName": "Umer",
+            "postalCode": "sad"
+          }
+        }
+      ]
+    }
+  }
+]

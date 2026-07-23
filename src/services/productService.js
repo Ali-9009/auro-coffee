@@ -1,36 +1,42 @@
 import { supabase } from "../lib/supabase";
 
+import {
+    centsToPrice,
+    nullableCentsToPrice,
+} from "../utils/pricing";
+
 function mapProduct(product) {
-    const sizes = (product.product_sizes || [])
-        .filter((size) => size.active !== false)
+    const sizes = (
+        product.product_sizes || []
+    )
+        .filter(
+            (size) => size.active !== false
+        )
         .map((size) => ({
             id: size.id,
-            name: size.name,
-
-            // Supabase: 100
-            // Frontend: 1.00
-            extraPrice:
-                Number(size.extra_price || 0) / 100,
+            productId: size.product_id,
+            name: size.name || "",
+            extraPrice: centsToPrice(
+                size.extra_price
+            ),
+            active: size.active ?? true,
+            createdAt: size.created_at,
         }));
 
     return {
         ...product,
 
-        // Supabase: 550
-        // Frontend: 5.50
-        price: Number(product.price || 0) / 100,
+        price: centsToPrice(
+            product.price
+        ),
 
-        oldPrice:
-            product.old_price !== null &&
-                product.old_price !== undefined
-                ? Number(product.old_price) / 100
-                : null,
+        oldPrice: nullableCentsToPrice(
+            product.old_price
+        ),
 
-        costPrice:
-            product.cost_price !== null &&
-                product.cost_price !== undefined
-                ? Number(product.cost_price) / 100
-                : null,
+        costPrice: nullableCentsToPrice(
+            product.cost_price
+        ),
 
         shortDescription:
             product.short_description || "",
@@ -42,14 +48,16 @@ function mapProduct(product) {
             product.meta_description || "",
 
         lowStockThreshold:
-            Number(product.low_stock_threshold || 0),
+            Number(
+                product.low_stock_threshold
+            ) || 0,
 
         trackInventory:
             product.track_inventory !== false,
 
         sizes,
 
-        // Keep this too in case another page uses product_sizes
+        // Compatibility for components that use this name.
         product_sizes: sizes,
     };
 }
